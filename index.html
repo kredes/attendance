@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Attendance</title>
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="./style.css">
+
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+	
+	<script src="./keccak256.js"></script>
+	
+	<script src="./main.js"></script>
+
+</head>
+<body>
+    <div class="container-fluid">
+		<!-- Header -->
+		<div class="text-center">
+			<h1>Attendance Control System&trade;</h1>
+			<hr>
+			<h2 style="color: grey">Class is <span id="class-status"></span></h2>
+		</div>
+	
+		<br />
+		
+		<!-- Navbar -->
+		<ul class="nav nav-tabs nav-fill">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="tab" href="#students">Students</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="tab" href="#professor">Professor</a>
+			</li>
+		</ul>
+		
+		<div class="tab-content">
+			<div id="students" class="tab-pane fade" role="tabpanel">
+				<br />
+				
+				<!-- Check current account's balance -->
+				<h3>Balance check</h3>
+				<div class="form-group">
+					<input id="check-bct-button" type="button" class="form-control" value="Check your BCT balance" />
+				</div>
+						
+				<div id="balance-table" class="table-responsive" style="display: none">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Address</th>
+								<th>Student</th>
+								<th>BCT</th>
+							</tr>
+						</thead>
+						<tbody id="check-bct-result"></tbody>
+					</table>
+				</div>
+				
+				<br /><br />
+				
+				<!-- Submit code -->
+				<h3>Submit a code</h3>
+				<div class="form-group">
+					<input id="input-submit-code" type="text" class="form-control" placeholder="Code" /><br />
+					<div id="submit-code-result" class="alert" style="display: none"></div>
+					<input id="submit-code-button" type="button" class="form-control" value="Submit" />
+				</div>
+				
+				<br />
+			</div>
+			
+			<div id="professor" class="tab-pane fade show active">
+				<br />
+				<!-- Start/End class -->
+				<h3>Start/end class</h3>
+				<div class="form-group">
+					<input id="switch-class-button" type="button" class="form-control" />
+					<div id="switch-class-result" class="alert" style="display: none"></div>
+				</div>
+				
+				<br /><br />
+				
+				<!-- Add N codes -->
+				<form class="form-horizontal">
+					<div class="form-group row">
+						<div class="col-md-5">
+							<h3>Add codes</h3>
+						</div>
+						<div class="col-md-2">
+							<input id="more-codes-input" class="form-control" type="number" min="0" />
+						</div>
+						<div id="more-codes-button" class="col-md-2">
+							<button type="button" class="form-control btn-info">
+								<i class="fa fa-plus"></i>
+						    </button>
+						</div>
+					</div>
+				</form>
+				
+				<!-- Code/Reward input -->
+				<form id="code-input-form" class="form-horizontal">
+					<div class="form-group row code-input-row">
+						<div class="col-md-5">
+							<input class="form-control code-input" type="number" min="0" placeholder="Code" />
+						</div>
+						<div class="col-md-5">
+							<input class="form-control reward-input" type="number" min="0" placeholder="Reward" />
+						</div>
+						<div class="col-md-2 one-more-code">
+							<button type="button" class="form-control btn-info">
+								<i class="fa fa-plus"></i>
+						    </button>
+						</div>
+					</div>
+				</form>
+				
+				<!-- Submit and result -->
+				<input id="add-codes-button" type="button" class="form-control" value="Add codes" />
+				<div id="add-codes-result" class="alert" style="display: none"></div>
+				
+				<br /><br />
+				
+				<!-- Set token contract -->
+				<h3>Set token contract</h3>
+				<div class="form-group">
+					<input id="token-contract-input" type="text" class="form-control" placeholder="Token contract's address" /><br />
+					<div id="token-contract-result" class="alert" style="display: none"></div>
+					<input id="token-contract-button" type="button" class="form-control" value="Submit" />
+				</div>
+				
+				<br /><br />
+				
+				<!-- Withdraw -->
+				<h3>Withdraw</h3>
+				<div class="form-group">
+					<input id="withdraw-button" type="button" class="form-control" value="Withdraw remaining tokens"/>
+					<div id="withdraw-result" class="alert" style="display: none"></div>
+				</div>
+			</div>
+		</div>
+    </div>
+
+</body>
+</html>
