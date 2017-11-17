@@ -17,6 +17,8 @@
 
     <script src="./node_modules/web3/dist/web3.min.js"></script>
 	
+    <script src="./config.js"></script>
+	
 	<script src="./keccak256.js"></script>
 	
 	<script src="./main.js"></script>
@@ -44,13 +46,13 @@
 		</ul>
 		
 		<div class="tab-content">
-			<div id="students" class="tab-pane fade" role="tabpanel">
+			<div id="students" class="tab-pane fade show active" role="tabpanel">
 				<br />
 				
 				<!-- Check current account's balance -->
 				<h3>Balance check</h3>
 				<div class="form-group">
-					<input id="check-bct-button" type="button" class="form-control" value="Check your BCT balance" />
+					<input id="check-tokens-button" type="button" class="form-control" value="Check your token balance" />
 				</div>
 						
 				<div id="balance-table" class="table-responsive" style="display: none">
@@ -59,10 +61,10 @@
 							<tr>
 								<th>Address</th>
 								<th>Student</th>
-								<th>BCT</th>
+								<th>Tokens</th>
 							</tr>
 						</thead>
-						<tbody id="check-bct-result"></tbody>
+						<tbody id="check-tokens-result"></tbody>
 					</table>
 				</div>
 				
@@ -79,7 +81,7 @@
 				<br />
 			</div>
 			
-			<div id="professor" class="tab-pane fade show active">
+			<div id="professor" class="tab-pane fade">
 				<br />
 				<!-- Start/End class -->
 				<h3>Start/end class</h3>
