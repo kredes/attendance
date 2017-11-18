@@ -21,7 +21,7 @@ function getClassStatus() {
 function switchClassStatus(on) {
 	$("#class-status")
 		.text(on ? "ON" : "OFF")
-		.css("color", on ? "green" : "red");
+		.css("color", on ? "#36ff32" : "#ff5656");
 	$("#switch-class-button")
 		.val(on ? "End class" : "Start class");
 }
@@ -55,7 +55,7 @@ function addCodeInputRow() {
 	$(".reward-input").last().val("");
 }
 
-
+// The actual thing
 $(document).ready(function() {
 
 	// Initial check for class status
@@ -69,12 +69,12 @@ $(document).ready(function() {
 	// Check current account's balance
     $("#check-tokens-button").click(function() {
 		tokens.balanceOf(web3.eth.defaultAccount, async (error, result) => {
-			let $resultTable = $("#check-tokens-result");
+			let resultTable = $("#check-tokens-result-table");
 			if (error)
-				resultText.text(error.message);
+				setAlert("danger", $("#check-tokens-result-text"), error.message);
 			else {
 				$("#balance-table").show();
-				$resultTable.html("");
+				resultTable.html("");	// Clear previous result
 				
 				let student = await getCurrentStudent();
 				student = student ? student : "None";
@@ -87,7 +87,7 @@ $(document).ready(function() {
 					"<td>" + balance + "</td>";
 				let row = $("<tr>").append(rowString);
 				
-				$resultTable.append(row);
+				resultTable.append(row);
 			}
 		});
 	});
@@ -97,18 +97,20 @@ $(document).ready(function() {
 		let resultText = $("#submit-code-result");
 		
 		let classOn = await getClassStatus();
-		
 		if (classOn instanceof Error)
 			setAlert("danger", resultText, classOn.message);
-		else if (classOn) {
+		else if (!classOn) {
+			let message = "Class is <strong>OFF!</strong> You cannot submit codes yet";
+			setAlert("danger", resultText, message);
+		}
+		else {
 			attend.submit($("#input-submit-code").val(), (error, result) => {
-					if (error)
-						setAlert("danger", resultText, error.message);
-					else
-						setAlert("success", resultText, "Code submitted successfully");
-				});
-		} else
-			setAlert("danger", resultText, "Class is <strong>OFF!</strong> You cannot submit codes yet");
+				if (error)
+					setAlert("danger", resultText, error.message);
+				else
+					setAlert("success", resultText, "Transaction sent successfully");
+			});
+		}
 	});
 	
 	// Set the class on/off
@@ -129,9 +131,9 @@ $(document).ready(function() {
 		$(".reward-input").each((i, elem) => rewards.push($(elem).val()));
 		
 		let resultText = $("#add-codes-result");
-		attend.addCodes(hashes, rewards, (result, error) => {
+		attend.addCodes(hashes, rewards, (error, result) => {
 			if (error) setAlert("danger", resultText, error.message);
-			else setAlert("success", resultText, "Codes added succesfully");
+			else setAlert("success", resultText, "Transaction sent successfully");
 		});
 	});
 	
@@ -145,21 +147,21 @@ $(document).ready(function() {
 	$("#token-contract-button").click(function() {
 		let address = $("#token-contract-input").val();
 		let resultText = $("#token-contract-result");
-		attend.setTokenContract(address, (result, error) => {
+		attend.setTokenContract(address, (error, result) => {
 			if (error) setAlert("danger", resultText, error.message);
-			else setAlert("success", resultText, "Token contract set successfully");
+			else setAlert("success", resultText, "Transaction sent successfully");
 		});
 	});
 	
 	// Withdraw
 	$("#withdraw-button").click(function() {
 		let resultText = $("#withdraw-result");
-		attend.withdraw((result, error) => {
+		attend.withdraw((error, result) => {
 			if (error) {
 				console.error(error);
 				setAlert("danger", resultText, error.message);
 			}
-			else setAlert("success", resultText, "Tokens withdrawn successfully");
+			else setAlert("success", resultText, "Transaction sent successfully");
 		});
 	});
 });

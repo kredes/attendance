@@ -25,132 +25,186 @@
 
 </head>
 <body>
-    <div class="container-fluid">
-		<!-- Header -->
-		<div class="text-center">
-			<h1>Attendance Control System&trade;</h1>
-			<hr>
-			<h2 style="color: grey">Class is <span id="class-status"></span></h2>
-		</div>
+
 	
-		<br />
-		
-		<!-- Navbar -->
-		<ul class="nav nav-tabs nav-fill">
-			<li class="nav-item">
-				<a class="nav-link active" data-toggle="tab" href="#students">Students</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" data-toggle="tab" href="#professor">Professor</a>
-			</li>
-		</ul>
-		
-		<div class="tab-content">
-			<div id="students" class="tab-pane fade show active" role="tabpanel">
-				<br />
-				
-				<!-- Check current account's balance -->
-				<h3>Balance check</h3>
-				<div class="form-group">
-					<input id="check-tokens-button" type="button" class="form-control" value="Check your token balance" />
-				</div>
+
+	<!-- Header -->
+	<div id="header" >
+		<div class="container">
+			<div class="row">
+				<div class="col header-height"></div>
+				<div class="col-6 text-center align-self-center" >
+						<h1>Attendance Control System&trade;</h1>
+						<hr>
+						<h2>Class is <span id="class-status"></span></h2>
+					</div>
+				<div class="col"></div>
+			  </div>
+		</div>
+	</div>
+
+	<!-- Content -->
+    <div class="container-fluid">
+		<div class="row" >
+			<div class="col"></div>
+			<div class="col-8">
+				<div id="content" class="card" >	
+					<div class="card-body">
+						<!-- Navbar -->
+						<ul id="navbar" class="nav nav-pills nav-fill">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#students">Students</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#professor">Professor</a>
+							</li>
+						</ul>
 						
-				<div id="balance-table" class="table-responsive" style="display: none">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>Address</th>
-								<th>Student</th>
-								<th>Tokens</th>
-							</tr>
-						</thead>
-						<tbody id="check-tokens-result"></tbody>
-					</table>
-				</div>
-				
-				<br /><br />
-				
-				<!-- Submit code -->
-				<h3>Submit a code</h3>
-				<div class="form-group">
-					<input id="input-submit-code" type="text" class="form-control" placeholder="Code" /><br />
-					<div id="submit-code-result" class="alert" style="display: none"></div>
-					<input id="submit-code-button" type="button" class="form-control" value="Submit" />
-				</div>
-				
-				<br />
-			</div>
-			
-			<div id="professor" class="tab-pane fade">
-				<br />
-				<!-- Start/End class -->
-				<h3>Start/end class</h3>
-				<div class="form-group">
-					<input id="switch-class-button" type="button" class="form-control" />
-					<div id="switch-class-result" class="alert" style="display: none"></div>
-				</div>
-				
-				<br /><br />
-				
-				<!-- Add N codes -->
-				<form class="form-horizontal">
-					<div class="form-group row">
-						<div class="col-md-5">
-							<h3>Add codes</h3>
-						</div>
-						<div class="col-md-2">
-							<input id="more-codes-input" class="form-control" type="number" min="0" />
-						</div>
-						<div id="more-codes-button" class="col-md-2">
-							<button type="button" class="form-control btn-info">
-								<i class="fa fa-plus"></i>
-						    </button>
+						<hr>
+					
+						<div class="tab-content">
+							<div id="students" class="tab-pane fade show active" role="tabpanel">
+								<br />
+								
+								<!-- Check current account's balance -->
+								<h3>Balance check</h3>
+								<div class="form-group">
+									<input id="check-tokens-button" type="button" class="form-control" value="Check your token balance" />
+								</div>
+										
+								<div id="balance-table" class="table-responsive" style="display: none">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Address</th>
+												<th>Student</th>
+												<th>Tokens</th>
+											</tr>
+										</thead>
+										<tbody id="check-tokens-result-table"></tbody>
+									</table>
+								</div>
+								
+								<div id="submit-code-result-text" class="alert" style="display: none"></div>
+								
+								<br /><br />
+								
+								<!-- Submit code -->
+								<h3>Submit a code</h3>
+								<div class="form-group">
+									<input id="input-submit-code" type="text" class="form-control" placeholder="Code" /><br />
+									<div id="submit-code-result" class="alert" style="display: none"></div>
+									<input id="submit-code-button" type="button" class="form-control" value="Submit" />
+								</div>
+								
+								<br />
+							</div>
+							
+							<div id="professor" class="tab-pane fade">
+								<br />
+								
+								<!-- First row's titles -->
+								<div class="row">
+									<div class="col-3">
+										<h3>Start/end class</h3>
+									</div>
+									<div class="col-6">
+										<h3>Set token contract</h3>
+									</div>
+									<div class="col-3">
+										<h3>Withdraw</h3>
+									</div>
+								</div>
+								
+								<!-- First row -->
+								<div class="row align-items-center">
+									<div class="col-3"
+										<!-- Start/End class -->
+										<div class="form-group ">
+											<div id="switch-class-result" class="alert" style="display: none"></div>
+											<input id="switch-class-button" type="button" class="form-control" />
+										</div>
+									</div>
+									
+									<div class="col-6">
+										<!-- Set token contract -->
+										<div class="form-group">
+											<input id="token-contract-input" type="text" class="form-control" placeholder="Token contract's address" /><br />
+											<div id="token-contract-result" class="alert" style="display: none"></div>
+											<input id="token-contract-button" type="button" class="form-control" value="Submit" />
+										</div>
+									</div>
+									
+									<div class="col-3">
+										<!-- Withdraw -->
+										<div class="form-group">
+											<div id="withdraw-result" class="alert" style="display: none"></div>
+											<input id="withdraw-button" type="button" class="form-control" value="Withdraw remaining tokens"/>
+										</div>
+									</div>
+								</div>
+								
+								<br /><br />
+								
+								<!-- Second row (without an actual row) -->
+								<!-- Add N codes -->
+								<form class="form-horizontal">
+									<div class="form-group row">
+										<div class="col-4">
+											<h3>Add codes</h3>
+										</div>
+										<div class="col-2">
+											<input id="more-codes-input" class="form-control" type="number" min="0" />
+										</div>
+										<div id="more-codes-button" class="col-2">
+											<button type="button" class="form-control btn-info">
+												<i class="fa fa-plus"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+								
+								<!-- Code/Reward input -->
+								<form id="code-input-form" class="form-horizontal">
+									<div class="form-group row code-input-row">
+										<div class="col-2"></div>
+										<div class="col-4">
+											<input class="form-control code-input" type="number" min="0" placeholder="Code" />
+										</div>
+										<div class="col-4">
+											<input class="form-control reward-input" type="number" min="0" placeholder="Reward" />
+										</div>
+										<div class="col-1 one-more-code">
+											<button type="button" class="form-control btn-info">
+												<i class="fa fa-plus"></i>
+											</button>
+										</div>
+										<div class="col-1"></div>
+									</div>
+								</form>
+								
+								<div id="add-codes-result" class="alert" style="display: none"></div>
+								
+								<!-- Submit and result -->
+								<div class="form-group row">
+									<div class="col-4"></div>
+									<div class="col-4">
+										
+										<input id="add-codes-button" type="button" class="form-control" value="Add codes" />
+									</div>
+									<div class="col-4"></div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</form>
-				
-				<!-- Code/Reward input -->
-				<form id="code-input-form" class="form-horizontal">
-					<div class="form-group row code-input-row">
-						<div class="col-md-5">
-							<input class="form-control code-input" type="number" min="0" placeholder="Code" />
-						</div>
-						<div class="col-md-5">
-							<input class="form-control reward-input" type="number" min="0" placeholder="Reward" />
-						</div>
-						<div class="col-md-2 one-more-code">
-							<button type="button" class="form-control btn-info">
-								<i class="fa fa-plus"></i>
-						    </button>
-						</div>
-					</div>
-				</form>
-				
-				<!-- Submit and result -->
-				<input id="add-codes-button" type="button" class="form-control" value="Add codes" />
-				<div id="add-codes-result" class="alert" style="display: none"></div>
-				
-				<br /><br />
-				
-				<!-- Set token contract -->
-				<h3>Set token contract</h3>
-				<div class="form-group">
-					<input id="token-contract-input" type="text" class="form-control" placeholder="Token contract's address" /><br />
-					<div id="token-contract-result" class="alert" style="display: none"></div>
-					<input id="token-contract-button" type="button" class="form-control" value="Submit" />
-				</div>
-				
-				<br /><br />
-				
-				<!-- Withdraw -->
-				<h3>Withdraw</h3>
-				<div class="form-group">
-					<input id="withdraw-button" type="button" class="form-control" value="Withdraw remaining tokens"/>
-					<div id="withdraw-result" class="alert" style="display: none"></div>
 				</div>
 			</div>
+			<div class="col"></div>
 		</div>
     </div>
-
+	
+	<div id="footer" class="card-footer wide text-muted text-center">
+		Made with indiference by <a href="https://github.com/kredes/" target="_blank">kredes</a><br />
+	</div>
 </body>
 </html>

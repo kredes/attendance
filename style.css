@@ -1,5 +1,47 @@
+* {
+  -webkit-border-radius: 0 !important;
+     -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
-	min-width: auto;
-	max-width: 800px;
-	margin: 50px auto;
+	padding-bottom: 49px;
+}
+
+.header-height {
+	height: 225px;
+}
+
+.nav-item .active {
+	background-color: #033F63 !important;
+}
+
+#header {
+	background-color: #033F63;
+}
+
+#header h1 {
+	color: white;
+}
+
+#header h2 {
+	color: #ededed;
+}
+
+#header hr {
+	border-color: white;
+}
+
+#footer {
+	width: 100%;
+	position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 49px;
+    overflow:hidden;
 }
