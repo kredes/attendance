@@ -1,6 +1,6 @@
 //var BigNumber = require('bignumber.js');
 
-var TEST_ENV = true;
+var TEST_ENV = false;
 
 var TEST_ATTEND_ADDR = "0xA4c37888A127f89EE02D2B838Bd9A9E0272054aF";
 var TEST_TOKEN_ADDR = "0x6c3184e7207C760EeE026DDDDbc3ad00e748992E";
