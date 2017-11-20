@@ -119,8 +119,10 @@ $(document).ready(function() {
 		let classOn = await getClassStatus();
 		attend.setState(!classOn, (error, result) => {
 			if (error) setAlert("danger", resultText, error.message);
-			else
+			else {
+				setAlert("success", resultText, "Transaction sent successfully");
 				switchClassStatus(!classOn);
+			}
 		});
 	});
 	

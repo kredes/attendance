@@ -1,4 +1,4 @@
-var BigNumber = require('bignumber.js');
+//var BigNumber = require('bignumber.js');
 
 var TEST_ENV = true;
 
